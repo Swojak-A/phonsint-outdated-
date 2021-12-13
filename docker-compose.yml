@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  app:
+    restart: always
+    env_file: ./.env
+    volumes:
+      - ./app:/app/app
+    build:
+      context: .
+      args:
+        MODE: ${APP_ENV}
+        DOCKER_USER_UID: ${DOCKER_USER_UID}
+    stdin_open: true
+    tty: true
+    image: phonsint-app:latest
+    ports:
+      - "127.0.0.1:5000:5000"
